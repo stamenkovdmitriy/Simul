@@ -1,0 +1,680 @@
+﻿<Window x:Class="Simul.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Simul"
+        xmlns:controls="clr-namespace:Simul.Controls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="480" Width="800"
+        Background="#1E2429">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="4" BorderBrush="#A0893D" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#285748"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#285748"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#806F38"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#806F38"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="285"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel
+            Grid.Column="1" Orientation="Horizontal"
+            VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="Старт" Click="StartButton_Click" Foreground="#A0893D"
+                    Background="Transparent" BorderBrush="Transparent"
+                    Width="80" Height="24"/>
+            <Label x:Name="TimeLabel" Margin="8" Content="10:00" FontSize="20" Height="40" Foreground="#A0893D" VerticalAlignment="Center"/>
+            <Button Content="Сброс" Click="ResetButton_Click" Foreground="#A0893D" Background="Transparent" BorderBrush="Transparent"
+                    Width="80" Height="24"/>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Width="0"
+                    Grid.Column="2" Grid.Row="1">
+            <Button x:Name="start"
+                    Width="100" Height="50" Click="start_Click"/>
+            <Button x:Name="finish" Grid.Column="2" Grid.Row="2"
+                    Width="100" Height="50" Click="finish_Click" />
+        </StackPanel>
+
+
+        <Border
+            Grid.Row="1" CornerRadius="8" Margin="4" Padding="4" BorderBrush="#FFF1C190" BorderThickness="1" >
+            <ScrollViewer
+
+                VerticalScrollBarVisibility="Hidden"
+                Margin="4">
+                <StackPanel
+                    Orientation="Vertical">
+
+
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid x:Name="iconPitanieZF"
+                                  Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/pitanie_ZF.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Источник питания — электрическое оборудование,
+                                                предназначенное для производства, аккумулирования электрической
+                                                энергии или изменения её характеристик.
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnPitanieZF" Click="btnPitanieZF_Click"
+                                    Content="Питание ЗФ" Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Margin="4"  Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4" >
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/electrodvigatel_ZF_M.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Электрический двигатель — электрическая машина (электромеханический преобразователь),
+                                                в которой электрическая энергия,
+                                                посредством магнитного поля, преобразуется
+                                                в механическую
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="electrodvigatel_ZF_M" Click="electrodvigatel_ZF_M_Click"
+                                    Content="Электродвигатель ЗФ М" Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="Transparent" BorderThickness="1"
+                            BorderBrush="Aqua" Width="120" Height="18"
+                            HorizontalAlignment="Left" CornerRadius="4">
+                        <TextBlock Text="Защитные"  Foreground="Aqua"
+                                   FontSize="11" HorizontalAlignment="Center" />
+                    </Border>
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/teplovoe_rele_3F.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Реле́ (релейный элемент) (фр. relais) — коммутационный аппарат,
+                                                электромагнитный,
+                                                слаботочный или иной элемент автоматических устройств,
+                                                который при воздействии на него внешних физических
+                                                явлений скачкообразно принимает конечное число значений
+                                                выходной величины
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnTteplovoe_rele_3F" Click="btnTteplovoe_rele_3F_Click"
+                                    Content="Тепловое реле 1Ф КК" Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150"/>
+                        </StackPanel>
+                    </Border>
+
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/rele_vremeni_KT.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Реле́ вре́мени — реле, предназначенное для создания независимой выдержки времени и обеспечения
+                                                определённой последовательности работы элементов схемы.
+                                                Реле времени применяется в случаях, когда необходимо
+                                                автоматически выполнить какое-то действие не сразу после
+                                                появления управляющего сигнала, а через установленный
+                                                промежуток времени
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnRrele_vremeni_KT" Click="btnRrele_vremeni_KT_Click"
+                                    Content="Реле времени КТ" Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/rele_vremeni_scignal_KT.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Реле́ вре́мени — реле, предназначенное для создания независимой выдержки времени и обеспечения
+                                                определённой последовательности работы элементов схемы.
+                                                Реле времени применяется в случаях, когда необходимо
+                                                автоматически выполнить какое-то действие не сразу после
+                                                появления управляющего сигнала, а через установленный
+                                                промежуток времени
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnRrele_vremeni_scignal_KT" Click="btnRrele_vremeni_scignal_KT_Click"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150">
+                                <TextBlock
+                                    Text="Реле времени с управляемым сигналом КТ"
+                                    Width="145"
+                                    TextAlignment="Center"
+                                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                                    Background="Transparent"
+                                    Foreground="#A0893D"
+                                    TextWrapping="Wrap"/>
+                            </Button>
+
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="Transparent" BorderThickness="1"
+                            BorderBrush="Aqua" Width="120" Height="18"
+                            HorizontalAlignment="Left" CornerRadius="4">
+                        <TextBlock Text="Коммутационные"  Foreground="Aqua"
+                                   FontSize="11" HorizontalAlignment="Center" />
+                    </Border>
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/avtomat_vycl_3F.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Автомати́ческий выключа́тель — контактный коммутационный аппарат (механический или электронный),
+                                                способный включать токи, проводить их и отключать при
+                                                нормальных условиях в цепи, а также включать, проводить
+                                                в течение нормированного (заданного) времени и
+                                                автоматически отключать токи при нормированных
+                                                ненормальных условиях в цепи, таких как токи короткого замыкания
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnAvtomat_vycl_3F" Click="btnAvtomat_vycl_3F_Click"
+                                    Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150">
+                                <TextBlock
+                                    Text="Автоматический выключатель 3Ф"
+                                    Width="145"
+                                    TextAlignment="Center"
+                                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                                    Background="Transparent"
+                                    Foreground="#A0893D"
+                                    TextWrapping="Wrap"/>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/avtomat_vycl_1F.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Автомати́ческий выключа́тель — контактный коммутационный аппарат (механический или электронный),
+                                                способный включать токи, проводить их и отключать при
+                                                нормальных условиях в цепи, а также включать, проводить
+                                                в течение нормированного (заданного) времени и
+                                                автоматически отключать токи при нормированных
+                                                ненормальных условиях в цепи, таких как токи короткого замыкания
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnAvtomat_vycl_1F" Click="btnAvtomat_vycl_1F_Click"
+                                    Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150">
+                                <TextBlock
+                                    Text="Автоматический выключатель 1Ф"
+                                    Width="145"
+                                    TextAlignment="Center"
+                                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                                    Background="Transparent"
+                                    Foreground="#A0893D"
+                                    TextWrapping="Wrap"/>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/kontactor_KM.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Конта́ктор (лат. contāctor «соприкасатель») — двухпозиционный электромагнитный аппарат, предназначенный для частых
+                                                дистанционных включений и выключений силовых электрических цепей в
+                                                нормальном режиме работы. Разновидность электромагнитного реле.
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnKontactor_KM" Click="btnKontactor_KM_Click"
+                                    Content="Контактор КМ" Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/predohranitel_FU.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Предохранитель — коммутационный электрический аппарат, предназначенный для отключения защищаемой цепи размыканием
+                                                или разрушением специально предусмотренных для этого токоведущих
+                                                частей под действием тока, превышающего определённое значение.
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnPredohranitel_FU" Click="predohranitel_FU_Click"
+                                    Content="Предохранитель FU" Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="Transparent" BorderThickness="1"
+                            BorderBrush="Aqua" Width="120" Height="18"
+                            HorizontalAlignment="Left" CornerRadius="4">
+                        <TextBlock Text="Пускорегулирующие"  Foreground="Aqua"
+                                   FontSize="11" HorizontalAlignment="Center" />
+                    </Border>
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/knopochn_post_SB.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Пост кнопочный предназначен для коммутации электрических цепей управления и сигнализации, как на месте, так и
+                                                дистанционно. Применяется для дистанционного управления различными
+                                                механизмами и электрическими машинами, управления освещением и тд.
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnKknopochn_post_SB" Click="btnKknopochn_post_SB_Click"
+                                    Content="Кнопочный пост SB" Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/knopochn_post_revers_SB.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Кнопочный пост реверс – это устройство, объединяющее несколько различных кнопок, расположенных под единой оболочкой. Оно предназначено для управления электрическим оборудованием, включения и выключения электроприводов, а также для экстренного отключения устройств
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnKknopochn_post_revers_SB" Click="btnKknopochn_post_revers_SB_Click"
+                                    Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150">
+                                <TextBlock
+                                    Text="Кнопочный пост реверс SB"
+                                    Width="145"
+                                    TextAlignment="Center"
+                                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                                    Background="Transparent"
+                                    Foreground="#A0893D"
+                                    TextWrapping="Wrap"/>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/vycluchatel_S.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Выключатель с ручным управлением – это устройство, которое может автоматически управлять включением и выключением света, когда встроенный датчик движения обнаруживает движущиеся объекты или присутствие людей в помещении
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="btnVycluchatel_S" Click="btnVycluchatel_S_Click"
+                                    Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150">
+                                <TextBlock
+                                    Text="Выключатель с ручным управлением s"
+                                    Width="145"
+                                    TextAlignment="Center"
+                                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                                    Background="Transparent"
+                                    Foreground="#A0893D"
+                                    TextWrapping="Wrap"/>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="Transparent" BorderThickness="1"
+                            BorderBrush="Aqua" Width="120" Height="18"
+                            HorizontalAlignment="Left" CornerRadius="4">
+                        <TextBlock Text="Контролирующие"  Foreground="Aqua"
+                                   FontSize="11" HorizontalAlignment="Center" />
+                    </Border>
+
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4" >
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/lampa_HLR.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Лампа HLR - это акроним для "High Light Reflectance" (высокая отражательная способность света). Это специальный
+                                                тип лампы, который обладает высокой степенью отражения света.
+                                                Благодаря своим характеристикам, лампы HLR могут быть использованы
+                                                для повышения освещенности в помещениях, даже при невысокой мощности
+                                                осветительных приборов. Они обычно используются в коммерческих
+                                                помещениях, таких как офисы, торговые центры, учебные заведения и т.д., где хорошая освещенность играет важную роль. Лампы HLR также могут помочь снизить энергопотребление и расходы на электроэнергию, так как они обеспечивают более эффективное использование света.
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+                            </Grid>
+                            <Button x:Name="lampa_HLR" Click="lampa_HLR_Click"
+                                    Content="Лампа HLR" Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border
+                        Margin="4" Height="60" CornerRadius="8" BorderThickness="1" BorderBrush="Aqua">
+                        <StackPanel Orientation="Horizontal" Margin="4">
+                            <Grid Width="80" HorizontalAlignment="Left" Margin="4">
+                                <Grid.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="/Resources/lampa_HLG.png"/>
+                                </Grid.Background>
+                                <Grid.ToolTip>
+                                    <ToolTip Background="#253939">
+                                        <StackPanel Width="200">
+                                            <TextBlock TextWrapping="Wrap"
+                                                       Foreground="White">
+                                                Галогеновая лампа (HLG) - это тип светильника, который использует галогеновые лампы в качестве источника света.
+                                                Галогеновые лампы содержат галогены (например, йод, бром) внутри
+                                                лампы, что позволяет им работать при более высоких температурах и
+                                                давать более яркий свет по сравнению с обычными лампами накаливания.
+                                                Они также имеют длительный срок службы, хорошую цветопередачу и
+                                                могут быть диммируемыми.
+
+
+                                                Галогеновые лампы часто используются для освещения в домашних условиях, в магазинах, галереях и в других местах,
+                                                где необходимо хорошее качество освещения. Они могут быть применены
+                                                как для общего освещения, так и для акцентного освещения, в
+                                                зависимости от конкретных потребностей.
+
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Grid.ToolTip>
+
+                            </Grid>
+                            <Button x:Name="lampa_HLG" Click="lampa_HLG_Click"
+                                    Content="Лампа HLG" Foreground="#A0893D"
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    Width="150"/>
+                        </StackPanel>
+                    </Border>
+                    <!--         -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <TextBlock
+            Grid.Row="1"
+            Width="68" Height="18" Margin="-4"
+            VerticalAlignment="Top" Foreground="#FFF1C190" Background="#1E2429"
+            Text="Аппараты" TextAlignment="Center" />
+
+        <ScrollViewer x:Name="scrlCanvas"
+                      Grid.Column="1" Grid.Row="1"
+                      VerticalScrollBarVisibility="Hidden"
+                      HorizontalScrollBarVisibility="Hidden">
+            <Canvas Name="myCanvas"
+
+                    Background="Black"
+                    Width="3000" Height="2000">
+
+            </Canvas>
+        </ScrollViewer>
+
+
+        <StackPanel
+            Grid.Row="2" Grid.Column="1"
+            Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button x:Name="shem" Content="Схемы" Click="shem_Click"
+                    Width="80" Height="24"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Foreground="#A0893D" Margin="0,0,8,0" />
+            <Button x:Name="lab" Click="lab_Click"
+                    Width="170" Height="24"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Foreground="#A0893D" Margin="8,0,0,0" >
+                <TextBlock
+                    Text="Лабораторные работы"
+                    Width="160"
+                    TextAlignment="Center"
+                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                    Background="Transparent"
+                    Foreground="#A0893D"
+                    TextWrapping="Wrap"/>
+            </Button>
+
+        </StackPanel>
+
+
+
+    </Grid>
+</Window>
