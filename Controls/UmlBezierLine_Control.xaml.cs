@@ -20,7 +20,7 @@ namespace Simul.Controls
         private Ellipse startPointEllipse;
         private Ellipse endPointEllipse;
         private Ellipse controlPointEllipse;
-        private Path bezierPath;
+        public Path bezierPath;
 
         public static List<UmlBezierLine_Control> bezierLines = new List<UmlBezierLine_Control>();
 
@@ -72,8 +72,7 @@ namespace Simul.Controls
 
             bezierPath = new Path();
             bezierPath.Stroke = Brushes.Blue;
-            bezierPath.StrokeThickness = 8;
-
+            bezierPath.StrokeThickness = 6;
             
 
             Canvas canvas = new Canvas();

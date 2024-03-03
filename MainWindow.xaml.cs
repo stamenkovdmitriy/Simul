@@ -69,6 +69,13 @@ namespace Simul
         {
             timer.Start();
         }
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+            //поиск ошибок
+            GetMistakecs gm = new GetMistakecs();
+            gm.UpdateCountLabel(countLabel);
+        }
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
@@ -83,6 +90,7 @@ namespace Simul
         {
             
             timeLeft = TimeSpan.FromMinutes(10);
+            countLabel.Content = null;
         }
         private void UpdateTimeLabel()
         {
@@ -394,20 +402,43 @@ namespace Simul
             ElectricalContact post_SB2_44 = new ElectricalContact("post_SB2_44", 20, 20, 67, 259, knopochn_post_revers_SB, myCanvas);
         }
 
-
+        
         private  void Ellipse1_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // сравнеие списков для нахождения совпадений
-            CompareList.CompareisList(
-                ShemList.shemaLine, 8,
-                () => electrodvigatel_Control.StartRotation());
-            CompareList.CompareisList(
+            if (chek_1.IsChecked == true)
+            {
+                CompareList.CompareisList(
                 ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv, 8,
                 () => electrodvigatel_Control.StartRotation());
-            CompareList.CompareisList(
+            }
+            else if(chek_2.IsChecked == true)
+            {
+                CompareList.CompareisList(
                 ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv_Revers, 8,
                 () => electrodvigatel_Control.StartReverseRotation());
+            }
+            else if (chek_3.IsChecked == true)
+            {
+                CompareList.CompareisList(
+                ShemList.shemaLine, 19,
+                () => electrodvigatel_Control.StartRotation());
+            }
+            else if (chek_4.IsChecked == true)
+            {
+                CompareList.CompareisList(
+                ShemList.shemaLineRevers, 19,
+                () => electrodvigatel_Control.StartReverseRotation());
+            }
+            
+            
+
+            //поиск ошибок
+            GetMistakecs gm = new GetMistakecs();
+            gm.UpdateCountLabel(countLabel);
         }
+        
+
         private  void Ellipse2_MouseDown(object sender, MouseButtonEventArgs e)
         {
             electrodvigatel_Control.StopRotation();
