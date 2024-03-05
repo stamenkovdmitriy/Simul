@@ -18,11 +18,30 @@ namespace Simul.ViewModel
             int requiredMatches, Action actionToPerform)
         {
             int matchCount = 0;
+            foreach (var bezierLine in UmlBezierLine_Container.umlLine)
+            {
+                if (listToCompare.Contains(bezierLine.Name))
+                {
+                    matchCount++;
+                    if (matchCount == requiredMatches)
+                    {
+                        actionToPerform();
+                    }
+                }
+            }
+        }
+
+        //  нахождение и показ ошибочных соединений
+        public static void CompareisListMistake(List<string> listToCompare,
+            int requiredMatches, Action actionToPerform)
+        {
+            int matchCount = 0;
             int mistakeCount = 0;
             foreach (var bezierLine in UmlBezierLine_Container.umlLine)
             {
                 if (listToCompare.Contains(bezierLine.Name))
                 {
+                    bezierLine.bezierPath.Stroke = new SolidColorBrush(Colors.Green);
                     matchCount++;
                     if (matchCount == requiredMatches)
                     {

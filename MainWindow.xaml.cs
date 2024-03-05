@@ -73,6 +73,17 @@ namespace Simul
         {
             timer.Stop();
             //поиск ошибок
+
+            Mistakes();
+        }
+        //поиск ошибок
+        private void Mistakes()
+        {
+            CompareList.CompareisListMistake(
+                ShemList.shemaMistake, 29,
+                () => electrodvigatel_Control.StartReverseRotation());
+
+            //поиск ошибок
             GetMistakecs gm = new GetMistakecs();
             gm.UpdateCountLabel(countLabel);
         }
@@ -405,40 +416,24 @@ namespace Simul
         
         private  void Ellipse1_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // сравнеие списков для нахождения совпадений
-            if (chek_1.IsChecked == true)
-            {
-                CompareList.CompareisList(
+            CompareList.CompareisList(
                 ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv, 8,
                 () => electrodvigatel_Control.StartRotation());
-            }
-            else if(chek_2.IsChecked == true)
-            {
-                CompareList.CompareisList(
-                ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv_Revers, 8,
-                () => electrodvigatel_Control.StartReverseRotation());
-            }
-            else if (chek_3.IsChecked == true)
-            {
-                CompareList.CompareisList(
+
+            CompareList.CompareisList(
+               ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv_Revers, 8,
+               () => electrodvigatel_Control.StartReverseRotation());
+
+            CompareList.CompareisList(
                 ShemList.shemaLine, 19,
                 () => electrodvigatel_Control.StartRotation());
-            }
-            else if (chek_4.IsChecked == true)
-            {
-                CompareList.CompareisList(
+
+            CompareList.CompareisList(
                 ShemList.shemaLineRevers, 19,
                 () => electrodvigatel_Control.StartReverseRotation());
-            }
-            
-            
 
-            //поиск ошибок
-            GetMistakecs gm = new GetMistakecs();
-            gm.UpdateCountLabel(countLabel);
         }
-        
-
+          
         private  void Ellipse2_MouseDown(object sender, MouseButtonEventArgs e)
         {
             electrodvigatel_Control.StopRotation();
