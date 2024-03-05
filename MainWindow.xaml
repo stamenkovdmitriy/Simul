@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Simul"
         xmlns:controls="clr-namespace:Simul.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="900"
+        Title="MainWindow" Height="480" Width="1000"
         Background="#1E2429">
     <Window.Resources>
         <Style x:Key="FocusVisual">
@@ -72,34 +72,47 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="285"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
 
         <StackPanel
-            Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal"
-            VerticalAlignment="Center" HorizontalAlignment="Center" >
+            Grid.Column="1"  Orientation="Horizontal"
+            VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0">
+            <Button x:Name="shem" Content="Схемы" Click="shem_Click"
+                    Height="24" Width="80"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    Foreground="#A0893D" Margin="8,0,8,0"  />
+            <Button x:Name="lab" Click="lab_Click" Content="Лабораторные работы"
+                    Height="24"  Width="160" VerticalContentAlignment="Center"
+                    Foreground="#A0893D" Margin="0,0,40,0"  />
+
+        </StackPanel>
+        <StackPanel
+            Grid.Column="1"  Orientation="Horizontal"
+            VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0">
             <Button Content="Старт" Click="StartButton_Click" Foreground="#A0893D"
                     Background="Transparent" BorderBrush="Transparent"
-                    Width="80" Height="24"/>
+                    Width="60" Height="24" Margin="8,0,0,0"/>
             <Label x:Name="TimeLabel" Margin="8" Content="10:00" FontSize="20"
                    Height="40" Foreground="#A0893D" VerticalAlignment="Center"/>
             <Button Content="Стоп" Click="StopButton_Click" Foreground="#A0893D"
                     Background="Transparent" BorderBrush="Transparent"
-                    Width="80" Height="24" Margin="0,0,4,0"/>
+                    Width="60" Height="24" Margin="0,0,4,0"/>
             <Button Content="Сброс" Click="ResetButton_Click" Foreground="#A0893D"
                     Background="Transparent" BorderBrush="Transparent"
-                    Width="80" Height="24" Margin="4,0,0,0"/>
+                    Width="60" Height="24" Margin="4,0,0,0"/>
             <Label x:Name="countLabelText" Margin="8,0,0,4" Content="ошибок:" FontSize="16"
                    Height="30" Foreground="#A0893D" VerticalAlignment="Center" />
             <Label x:Name="countLabel" Margin="0" Content="0" FontSize="20"
                    Height="40" Foreground="#A0893D" VerticalAlignment="Center"/>
         </StackPanel>
+
 
         <StackPanel Orientation="Vertical" Width="0"
                     Grid.Column="2" Grid.Row="1">
@@ -656,57 +669,7 @@
             </Canvas>
         </ScrollViewer>
 
-        <Border
-            Grid.Row="1" Grid.Column="2" CornerRadius="8"
-            Margin="4" Padding="4" BorderBrush="#FFF1C190" BorderThickness="1">
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <StackPanel>
-                    <Button x:Name="shem" Content="Схемы" Click="shem_Click"
-                            Height="24"
-                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                            Foreground="#A0893D" Margin="4,8,4,8" />
-                    <Button x:Name="lab" Click="lab_Click"
-                            Height="24"
-                            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                            Foreground="#A0893D" Margin="4,8,4,8" >
-                        <TextBlock
-                            Text="Лабораторные работы"
-                            Width="160"
-                            TextAlignment="Center"
-                            VerticalAlignment="Center" HorizontalAlignment="Right"
-                            Background="Transparent"
-                            Foreground="#A0893D"
-                            TextWrapping="Wrap"/>
-                    </Button>
-                    <Border BorderBrush="#FF1E8890" BorderThickness="1"
-                            CornerRadius="4" Margin="4,8,4,8" Padding="0">
-                        <GroupBox Foreground="Aqua" Margin="0,4,0,0"
-                                  BorderThickness="0"  Header="Выбор схемы">
-                            <StackPanel >
-                                <RadioButton x:Name="chek_1" Foreground="#A0893D" Background="#A0893D" Margin="0,4,0,4">
-                                Лабораторная работа #1</RadioButton>
-                                <RadioButton x:Name="chek_2" Foreground="#A0893D"  Background="#A0893D"  Margin="0,4,0,4">
-                                Лабораторная работа #2</RadioButton>
-                                <RadioButton x:Name="chek_3" Foreground="#A0893D"   Background="#A0893D"  Margin="0,4,0,4">
-                                Лабораторная работа #3</RadioButton>
-                                <RadioButton x:Name="chek_4" Foreground="#A0893D"   Background="#A0893D"  Margin="0,4,0,4">
-                                Лабораторная работа #4</RadioButton>
-                                <RadioButton Foreground="#A0893D" Background="#A0893D" Margin="0,4,0,4">
-                                Лабораторная работа #5</RadioButton>
-                                <RadioButton Foreground="#A0893D"  Background="#A0893D"  Margin="0,4,0,4">
-                                Лабораторная работа #6</RadioButton>
-                                <RadioButton Foreground="#A0893D"   Background="#A0893D"  Margin="0,4,0,4">
-                                Лабораторная работа #7</RadioButton>
-                                <RadioButton Foreground="#A0893D"   Background="#A0893D"  Margin="0,4,0,4">
-                                Лабораторная работа #8</RadioButton>
-                            </StackPanel>
-                        </GroupBox>
-                    </Border>
 
-                </StackPanel>
-            </ScrollViewer>
-
-        </Border>
 
 
         <StackPanel
