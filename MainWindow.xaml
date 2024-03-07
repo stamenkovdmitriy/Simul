@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Simul"
         xmlns:controls="clr-namespace:Simul.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="1000"
-        Background="#1E2429">
+        Title="MainWindow" Height="800" Width="1000"  Loaded="Window_Loaded"
+        Background="#1E2429" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -72,7 +72,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="285"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="240"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -82,7 +82,7 @@
 
 
         <StackPanel
-            Grid.Column="1"  Orientation="Horizontal"
+            Grid.Column="1" Orientation="Horizontal"
             VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0">
             <Button x:Name="shem" Content="Схемы" Click="shem_Click"
                     Height="24" Width="80"
@@ -94,8 +94,8 @@
 
         </StackPanel>
         <StackPanel
-            Grid.Column="1"  Orientation="Horizontal"
-            VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0">
+            Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal"
+            VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0">
             <Button Content="Старт" Click="StartButton_Click" Foreground="#A0893D"
                     Background="Transparent" BorderBrush="Transparent"
                     Width="60" Height="24" Margin="8,0,0,0"/>
@@ -124,7 +124,8 @@
 
 
         <Border
-            Grid.Row="1" CornerRadius="8" Margin="4" Padding="4" BorderBrush="#FFF1C190" BorderThickness="1" >
+            Grid.Row="1" CornerRadius="8" Margin="4" Padding="4"
+            BorderBrush="#FFF1C190" BorderThickness="1" >
             <ScrollViewer
 
                 VerticalScrollBarVisibility="Hidden"
@@ -222,7 +223,7 @@
                                 </Grid.ToolTip>
                             </Grid>
                             <Button x:Name="btnTteplovoe_rele_3F" Click="btnTteplovoe_rele_3F_Click"
-                                    Content="Тепловое реле 1Ф КК" Foreground="#A0893D"
+                                    Content="Тепловое реле 3Ф КК" Foreground="#A0893D"
                                     Background="Transparent" BorderBrush="Transparent"
                                     Width="150"/>
                         </StackPanel>
@@ -637,16 +638,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
                 </StackPanel>
             </ScrollViewer>
         </Border>
@@ -682,6 +673,41 @@
         </StackPanel>
 
 
+        <StackPanel Grid.Column="2" Grid.Row="1" Margin="8"
+                    Orientation="Vertical" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                <Label Content="Логин:" Foreground="#FF3690BB"
+                       Margin="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Border  Margin="4"  Background="#FF0B1D1F" CornerRadius="12">
+                    <TextBox x:Name="userTextBox" BorderThickness="0"
+                             Foreground="#FF3690BB" Background="Transparent" Height="24" Width="147"
+                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+
+            </StackPanel>
+
+            <ListBox x:Name="chatbox"
+                     Background="#FF042626"
+                     Width="200" Height="558" Margin="4"
+                     Foreground="#FF3690BB" BorderThickness="0" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Border Height="40" Width="196" CornerRadius="12"
+                    Background="#FF0B1D1F" Margin="4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="messageTextBox"
+                             Width="160" Height="32"
+                             Foreground="#FF3690BB" Background="Transparent" Margin="4" BorderThickness="0"/>
+                    <Button x:Name="sendBtn" Content="ОK" Height="20" Width="24"
+                            Click="Button_Click"  Margin="0,4,4,4" Foreground="#A0893D" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
 
     </Grid>
 </Window>

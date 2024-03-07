@@ -24,19 +24,23 @@ using System.Xml.Linq;
 using static Simul.Controls.UmlBezierLine_Control;
 using Simul.Data;
 using Simul.ViewModel;
+using Microsoft.AspNetCore.SignalR.Client;
+using System.Net;
 
 
 namespace Simul
 {
-
+    
     public partial class MainWindow : Window
     {
+        HubConnection connection;  // подключение для взаимодействия с хабом
 
         public MainWindow()
         {
             InitializeComponent();
 
             
+
             myCanvas.MouseWheel += MyCanvas_MouseWheel;
 
             PreviewKeyDown += MainWindow_PreviewKeyDown;
@@ -47,9 +51,54 @@ namespace Simul
             timer.Tick += Timer_Tick;
 
             ResetTimer();
+
+            // создаем подключение к хабу
+            connection = new HubConnectionBuilder()
+                .WithUrl("https://localhost:7246/chat")
+                .Build();
+
+
+            // регистрируем функцию Receive для получения данных
+            connection.On<string, string>("Receive", (user, message) =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    var newMessage = $"{user}: {message}";
+                    chatbox.Items.Insert(0, newMessage);
+                });
+            });
+        }
+        // обработчик загрузки окна
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+                // подключемся к хабу
+                await connection.StartAsync();
+                chatbox.Items.Add("Вы вошли в чат");
+                sendBtn.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                chatbox.Items.Add(ex.Message);
+            }
+        }
+        // отправка сообщения в чате
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // отправка сообщения
+                await connection.InvokeAsync("Send", userTextBox.Text, messageTextBox.Text);
+            }
+            catch (Exception ex)
+            {
+                chatbox.Items.Add(ex.Message);
+            }
         }
 
-// Таймер
+        // Таймер
         private readonly DispatcherTimer timer;
         private TimeSpan timeLeft;    
         private void Timer_Tick(object sender, EventArgs e)
