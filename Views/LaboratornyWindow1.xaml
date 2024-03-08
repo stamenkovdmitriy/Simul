@@ -10,7 +10,7 @@
         Title="LaboratornyWindow1" Height="450" Width="800">
 
     <Grid Background="#FFA3E1EC">
-        <FlowDocumentScrollViewer  >
+        <FlowDocumentPageViewer  >
             <FlowDocument>
                 <Paragraph FontSize="16" FontWeight="Bold" Margin="0,0,0,10">Лабораторная работа № 1</Paragraph>
                 <Paragraph Margin="0,0,0,10">Сборка схемы управления электродвигателем реверсивным ПМ</Paragraph>
@@ -85,7 +85,7 @@
 
 
             </FlowDocument>
-        </FlowDocumentScrollViewer>
+        </FlowDocumentPageViewer>
 
     </Grid>
 </Window>

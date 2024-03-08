@@ -295,6 +295,9 @@
     <Compile Include="ViewModel\AddOffsetConverter.cs" />
     <Compile Include="ViewModel\CompareList.cs" />
     <Compile Include="ViewModel\GetMistakecs.cs" />
+    <Compile Include="Views\InstrucsiaWindow1.xaml.cs">
+      <DependentUpon>InstrucsiaWindow1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LaboratornyWindow1.xaml.cs">
       <DependentUpon>LaboratornyWindow1.xaml</DependentUpon>
     </Compile>
@@ -332,6 +335,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InstrucsiaWindow1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LaboratornyWindow1.xaml">
       <SubType>Designer</SubType>
@@ -412,7 +419,13 @@
   <ItemGroup>
     <Resource Include="Resources\image04.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\message.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\i_1.png" />
+    <Resource Include="Resources\i_2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.6.5.5\build\Fody.targets" Condition="Exists('packages\Fody.6.5.5\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -118,12 +118,22 @@ namespace Simul
         {
             timer.Start();
         }
-        private void StopButton_Click(object sender, RoutedEventArgs e)
+        private async void StopButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
             //поиск ошибок
 
             Mistakes();
+
+            try
+            {
+                // отправка сообщения
+                await connection.InvokeAsync("Send", userTextBox.Text, "ошибок = "+countLabel.Content);
+            }
+            catch (Exception ex)
+            {
+                chatbox.Items.Add(ex.Message);
+            }
         }
         //поиск ошибок
         private void Mistakes()
@@ -538,6 +548,12 @@ namespace Simul
         private void finish_Click(object sender, RoutedEventArgs e)
         {
             electrodvigatel_Control.StopRotation();
+        }
+
+        private void inform_Click(object sender, RoutedEventArgs e)
+        {
+            InstrucsiaWindow1 r = new InstrucsiaWindow1();
+            r.Show();
         }
     }
 }

@@ -1,0 +1,38 @@
+﻿<Window x:Class="Simul.Views.InstrucsiaWindow1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Simul.Views"
+        mc:Ignorable="d"
+        Title="InstrucsiaWindow1" Height="450" Width="800">
+    <Grid Background="#FFA3E1EC">
+        <FlowDocumentPageViewer  >
+            <FlowDocument>
+                <Paragraph FontSize="16" FontWeight="Bold" Margin="0,0,0,10">ИНСТРУКЦИЯ</Paragraph>
+                <Paragraph>Это приложение создано для лабораторных работ по дисциплинам: Электрооборудование; Монтаж, эксплуатация и ремонт электроустановок; Электромонтажная практика. С его помощью вы можете собирать схемы управления из разных электрических аппаратов, проверять их работоспособность и изучать их принципы действия.</Paragraph>
+                <Paragraph>Приложение имеет удобный и интуитивный интерфейс. В левой части окна вы видите набор кнопок, каждая из которых соответствует определенному электрическому аппарату. Если вы наведете курсор на кнопку, то увидите всплывающее окно с кратким описанием аппарата, его характеристиками и функциями. </Paragraph>
+                <Paragraph>
+                    <Floater Width="200" Padding="8" HorizontalAlignment="Right">
+                        <BlockUIContainer>
+                            <Image Source="/Resources/i_1.png"  />
+                        </BlockUIContainer>
+                    </Floater>
+                    Для того, чтобы добавить аппарат на рабочее пространство, вам достаточно нажать на кнопку
+                    и перетащить аппарат в нужное место. Рабочее пространство можно масштабировать для удобства
+                    работы при сборке схемы. Добавленные аппараты имеют контакты, которые можно соединять линиями проводов.
+                    <Floater Width="200" Padding="8" HorizontalAlignment="Left">
+                        <BlockUIContainer>
+                            <Image Source="/Resources/i_2.png"  />
+                        </BlockUIContainer>
+                    </Floater>
+                </Paragraph>
+
+
+                <Paragraph>После того, как вы собрали схему, вы можете проверить ее работоспособность, нажимая на кнопки аппарата Пост SB. Если провода правильно подключены, то запустится анимация вращения винта электродвигателя. В верхней части окна вы можете видеть таймер, который показывает, сколько времени вы потратили на выполнение лабораторной работы. В нижней части окна вы можете открыть окно с изображениями схем, которые вам необходимо собрать, и окно с содержанием лабораторных работ, которые вам предстоит выполнить.</Paragraph>
+                <Paragraph></Paragraph>
+                <Paragraph></Paragraph>
+            </FlowDocument>
+        </FlowDocumentPageViewer>
+    </Grid>
+</Window>
