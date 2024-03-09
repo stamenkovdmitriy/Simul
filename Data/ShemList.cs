@@ -134,9 +134,9 @@ namespace Simul.Data
             "post_SB2_22_kontactor_5", "kontactor_5_post_SB2_22",
 
             /* teplovoe_rele    electrodvigatel */
-            "tepl_rel_6_electrodvigatel_U1", "electrodvigatel_U1_tepl_rel_6",
+            "tepl_rel_2_electrodvigatel_U1", "electrodvigatel_U1_tepl_rel_2",
             "tepl_rel_4_4_electrodvigatel_V1", "electrodvigatel_V1_tepl_rel_4",
-            "tepl_rel_2_electrodvigatel_W1", "electrodvigatel_W1_tepl_rel_2", 
+            "tepl_rel_6_electrodvigatel_W1", "electrodvigatel_W1_tepl_rel_6",
             /* teplovoe_rele    electrodvigatel  REVERS */
             "tepl_rel_6_electrodvigatel_U1", "electrodvigatel_U1_tepl_rel_6",
             "tepl_rel_4_4_electrodvigatel_V1", "electrodvigatel_V1_tepl_rel_4",
