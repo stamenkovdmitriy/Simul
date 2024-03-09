@@ -102,10 +102,10 @@ namespace Simul.Data
 
             /*  avtomat    post_SB2    electrodvigatel  */
             "avtomat_3F_2_electrodvigatel_U1", "electrodvigatel_U1_avtomat_3F_2",
-            "avtomat_3F_4_electrodvigatel_V1", "electrodvigatel_V1_avtomat_3F_4",
-            "avtomat_3F_6_post_SB2_22", "avtomat_3F_6_post_SB2_22",
-            "post_SB2_21_post_SB2_14", "post_SB2_14_post_SB2_21",
-            "electrodvigatel_W1_post_SB2_13", "post_SB2_13_electrodvigatel_W1",
+                "avtomat_3F_4_electrodvigatel_V1", "electrodvigatel_V1_avtomat_3F_4",
+                "avtomat_3F_6_post_SB2_22", "avtomat_3F_6_post_SB2_22",
+                "post_SB2_21_post_SB2_14", "post_SB2_14_post_SB2_21",
+                "electrodvigatel_W1_post_SB2_13", "post_SB2_13_electrodvigatel_W1",
             /*  avtomat    post_SB2    electrodvigatel    REVERS  */
             "avtomat_3F_2_electrodvigatel_W1", "electrodvigatel_W1_avtomat_3F_2",
                 "avtomat_3F_4_electrodvigatel_V1", "electrodvigatel_V1_avtomat_3F_4",
@@ -134,13 +134,13 @@ namespace Simul.Data
             "post_SB2_22_kontactor_5", "kontactor_5_post_SB2_22",
 
             /* teplovoe_rele    electrodvigatel */
-            "tepl_rel_2_electrodvigatel_W2", "electrodvigatel_W2_tepl_rel_2",
-            "tepl_rel_4_4_electrodvigatel_U2", "electrodvigatel_U2_tepl_rel_4",
-            "tepl_rel_6_electrodvigatel_V2", "electrodvigatel_V2_tepl_rel_6",  
+            "tepl_rel_6_electrodvigatel_U1", "electrodvigatel_U1_tepl_rel_6",
+            "tepl_rel_4_4_electrodvigatel_V1", "electrodvigatel_V1_tepl_rel_4",
+            "tepl_rel_2_electrodvigatel_W1", "electrodvigatel_W1_tepl_rel_2", 
             /* teplovoe_rele    electrodvigatel  REVERS */
             "tepl_rel_6_electrodvigatel_U1", "electrodvigatel_U1_tepl_rel_6",
             "tepl_rel_4_4_electrodvigatel_V1", "electrodvigatel_V1_tepl_rel_4",
-            "tepl_rel_2_electrodvigatel_W1", "electrodvigatel_W1_tepl_rel_2"
+            "tepl_rel_2_electrodvigatel_W1", "electrodvigatel_W1_tepl_rel_2",
 
         };
     }
