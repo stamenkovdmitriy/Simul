@@ -54,9 +54,11 @@ namespace Simul
 
             // создаем подключение к хабу
             connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:7246/chat")
+                .WithUrl("https://derstamenkov.bsite.net/chat")
                 .Build();
 
+            // Игнорирование ошибок сертификата для https
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
             // регистрируем функцию Receive для получения данных
             connection.On<string, string>("Receive", (user, message) =>

@@ -70,12 +70,12 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="285"/>
+            <ColumnDefinition Width="282"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
@@ -83,16 +83,16 @@
 
         <StackPanel
             Grid.Column="1" Orientation="Horizontal"
-            VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0">
+            VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0" Width="287">
             <Button x:Name="shem" Content="Схемы" Click="shem_Click"
-                    Height="24" Width="80"
+                    Height="24" Width="0"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                     Foreground="#A0893D" Margin="8,0,8,0"  />
             <Button x:Name="lab" Click="lab_Click" Content="Лабораторные работы"
                     Height="24"  Width="160" VerticalContentAlignment="Center"
                     Foreground="#A0893D" Margin="0,0,8,0"  />
-            <Button x:Name="inform"  Content="i" Click="inform_Click"
-                    Height="24"  Width="24" VerticalContentAlignment="Center"
+            <Button x:Name="inform"  Content="Документация" Click="inform_Click"
+                    Height="24"  Width="101" VerticalContentAlignment="Center"
                     Foreground="#A0893D" Margin="0,0,40,0"  >
                 <Button.ToolTip>
                     <ToolTip Background="#253939">
@@ -106,8 +106,8 @@
 
         </StackPanel>
         <StackPanel
-            Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal"
-            VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0">
+            Grid.Column="1"  Orientation="Horizontal"
+            VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,00,0">
             <Button Content="Старт" Click="StartButton_Click" Foreground="#A0893D"
                     Background="Transparent" BorderBrush="Transparent"
                     Width="60" Height="24" Margin="8,0,0,0"/>
@@ -663,9 +663,9 @@
         <ScrollViewer x:Name="scrlCanvas"
                       Grid.Column="1" Grid.Row="1"
                       VerticalScrollBarVisibility="Hidden"
-                      HorizontalScrollBarVisibility="Hidden">
+                      HorizontalScrollBarVisibility="Hidden" Margin="8,0,8,0">
             <Canvas Name="myCanvas"
-                    Margin="4"
+
                     Background="Black"
                     Width="3000" Height="2000">
 
@@ -685,51 +685,54 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Margin="8"
-                    Orientation="Horizontal" VerticalAlignment="Center">
-            <StackPanel Orientation="Vertical"  HorizontalAlignment="Center">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Логин:" Foreground="#FF3690BB"
-                           Margin="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Border  Margin="4"  Background="#FF0B1D1F" CornerRadius="12"  Height="28" Width="140">
-                        <TextBox x:Name="userTextBox" BorderThickness="0" CaretBrush="#FF3690BB" TextAlignment="Center"
-                                 Foreground="#FF3690BB" Background="Transparent" Height="24" Width="125"
-                                 VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-                    </Border>
-                </StackPanel>
 
-                <Border Height="40" Width="196" CornerRadius="12"
-                        Background="#FF0B1D1F" Margin="4">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="messageTextBox"
-                                 Width="152" Height="32" CaretBrush="#FF3690BB" TextAlignment="Center"
-                                 Foreground="#FF3690BB" Background="Transparent" Margin="9,4,4,4" BorderThickness="0" TextWrapping="Wrap"/>
-                        <Button x:Name="sendBtn"  Height="20" Width="24"
-                                Click="Button_Click"  Margin="0,4,4,4"  HorizontalAlignment="Right" BorderBrush="#FF17515E" BorderThickness="0">
-                            <Button.Background>
-                                <ImageBrush ImageSource="/Resources/message.png"/>
-                            </Button.Background>
-                        </Button>
-                    </StackPanel>
+
+
+
+
+        <StackPanel Grid.Column="0" Grid.Row="2" Margin="4,0,0,0"
+                    Orientation="Vertical" VerticalAlignment="Center">
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Логин:" Foreground="#FF3690BB" Width="46"
+                       Margin="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Border  Margin="4"  Background="#FF0B1D1F" CornerRadius="12" Width="215"  >
+                    <TextBox x:Name="userTextBox" BorderThickness="0" CaretBrush="#FF3690BB" TextAlignment="Center"
+                             Foreground="#FF3690BB" Background="Transparent" Height="24" Width="199"
+                             VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                 </Border>
-
             </StackPanel>
-            <Border  Margin="4"  Background="#FF0B1D1F" CornerRadius="12" Width="454">
-                <ListBox x:Name="chatbox"
-                         Background="Transparent"
-                         Width="440" Height="68" Margin="4"
-                         Foreground="#FF3690BB" BorderThickness="0" >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+
+            <Border Height="40"  CornerRadius="12"
+                    Background="#FF0B1D1F" Margin="4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="messageTextBox"
+                             Width="233" Height="32" CaretBrush="#FF3690BB" TextAlignment="Center"
+                             Foreground="#FF3690BB" Background="Transparent" Margin="9,4,4,4" BorderThickness="0" TextWrapping="Wrap"/>
+                    <Button x:Name="sendBtn"  Height="20" Width="24"
+                            Click="Button_Click"  Margin="0,4,4,4"
+                            HorizontalAlignment="Right" BorderBrush="#FF17515E" BorderThickness="0">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Resources/message.png"/>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
             </Border>
-
-
-
         </StackPanel>
+
+        <Border  Grid.Row="2" Grid.Column="1"
+                Margin="8"  Background="#FF0B1D1F" CornerRadius="12" >
+            <ListBox x:Name="chatbox"
+                     Background="Transparent"
+                     Margin="8"
+                     Foreground="#FF3690BB" BorderThickness="0" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
 
     </Grid>
 </Window>

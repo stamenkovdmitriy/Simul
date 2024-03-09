@@ -426,6 +426,12 @@
     <Resource Include="Resources\i_1.png" />
     <Resource Include="Resources\i_2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\i_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\i_5.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.6.5.5\build\Fody.targets" Condition="Exists('packages\Fody.6.5.5\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
