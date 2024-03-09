@@ -130,7 +130,7 @@ namespace Simul
             try
             {
                 // отправка сообщения
-                await connection.InvokeAsync("Send", userTextBox.Text, "ошибок = "+countLabel.Content);
+                await connection.InvokeAsync("Send", userTextBox.Text, "ошибок = "+countLabel.Content+", таймер = "+TimeLabel.Content);
             }
             catch (Exception ex)
             {

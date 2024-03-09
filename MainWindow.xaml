@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Simul"
         xmlns:controls="clr-namespace:Simul.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="660" Width="1000"  Loaded="Window_Loaded"
+        Title="Симулятор электрических схем"  Height="660" Width="1000"  Loaded="Window_Loaded"
         Background="#1E2429" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="FocusVisual">
@@ -707,7 +707,7 @@
                     Background="#FF0B1D1F" Margin="4">
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="messageTextBox"
-                             Width="233" Height="32" CaretBrush="#FF3690BB" TextAlignment="Center"
+                             Width="224" Height="32" CaretBrush="#FF3690BB" TextAlignment="Center"
                              Foreground="#FF3690BB" Background="Transparent" Margin="9,4,4,4" BorderThickness="0" TextWrapping="Wrap"/>
                     <Button x:Name="sendBtn"  Height="20" Width="24"
                             Click="Button_Click"  Margin="0,4,4,4"
