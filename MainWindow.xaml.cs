@@ -120,17 +120,38 @@ namespace Simul
         {
             timer.Start();
         }
-        private async void StopButton_Click(object sender, RoutedEventArgs e)
+        private  void StopButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
             //поиск ошибок
 
             Mistakes();
 
+            CompareList.CompareisList(
+                ShemList.shemaLineRevers, 19,
+                () => electrodvigatel_Control.StartReverseRotation());
+
+            CompareList.CompareisList(
+                ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv, 8,
+                () => MessageGetResault());
+            CompareList.CompareisList(
+               ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv_Revers, 8,
+               () => MessageGetResault());
+            CompareList.CompareisList(
+                ShemList.shemaLine, 19,
+                () => MessageGetResault());
+            CompareList.CompareisList(
+                ShemList.shemaLineRevers, 19,
+                () => MessageGetResault());
+
+        }
+        // отправка сообщения с отчетом о сборке схемы
+        private async void MessageGetResault()
+        {
             try
             {
                 // отправка сообщения
-                await connection.InvokeAsync("Send", userTextBox.Text, "ошибок = "+countLabel.Content+", таймер = "+TimeLabel.Content);
+                await connection.InvokeAsync("Send", userTextBox.Text + "__ошибок = " + countLabel.Content + ", таймер = " + TimeLabel.Content, " РЕЗУЛЬТАТ ");
             }
             catch (Exception ex)
             {
@@ -480,6 +501,7 @@ namespace Simul
             CompareList.CompareisList(
                 ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv, 8,
                 () => electrodvigatel_Control.StartRotation());
+            
 
             CompareList.CompareisList(
                ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv_Revers, 8,
@@ -489,10 +511,7 @@ namespace Simul
                 ShemList.shemaLine, 19,
                 () => electrodvigatel_Control.StartRotation());
 
-            CompareList.CompareisList(
-                ShemList.shemaLineRevers, 19,
-                () => electrodvigatel_Control.StartReverseRotation());
-
+            
         }
           
         private  void Ellipse2_MouseDown(object sender, MouseButtonEventArgs e)
