@@ -123,13 +123,11 @@ namespace Simul
         private  void StopButton_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
-            //поиск ошибок
 
+            //поиск ошибок
             Mistakes();
 
-            CompareList.CompareisList(
-                ShemList.shemaLineRevers, 19,
-                () => electrodvigatel_Control.StartReverseRotation());
+            
 
             CompareList.CompareisList(
                 ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv, 8,
@@ -511,7 +509,9 @@ namespace Simul
                 ShemList.shemaLine, 19,
                 () => electrodvigatel_Control.StartRotation());
 
-            
+            CompareList.CompareisList(
+                ShemList.shemaLineRevers, 19,
+                () => electrodvigatel_Control.StartReverseRotation());
         }
           
         private  void Ellipse2_MouseDown(object sender, MouseButtonEventArgs e)
