@@ -54,7 +54,7 @@ namespace Simul
 
             // создаем подключение к хабу
             connection = new HubConnectionBuilder()
-                .WithUrl("https://derstamenkov.bsite.net/chat")
+                .WithUrl("https://derkov.bite.net/chats")
                 .Build();
 
             // Игнорирование ошибок сертификата для https
