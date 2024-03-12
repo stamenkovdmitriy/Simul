@@ -7,7 +7,8 @@
         xmlns:controls="clr-namespace:Simul.Controls"
         mc:Ignorable="d"
         Title="Симулятор электрических схем"  Height="660" Width="1000"  Loaded="Window_Loaded"
-        Background="#1E2429" WindowStartupLocation="CenterScreen">
+        Background="#1E2429" WindowStartupLocation="CenterScreen" >
+
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -84,10 +85,6 @@
         <StackPanel
             Grid.Column="1" Orientation="Horizontal"
             VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0" Width="287">
-            <Button x:Name="shem" Content="Схемы" Click="shem_Click"
-                    Height="24" Width="0"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                    Foreground="#A0893D" Margin="8,0,8,0"  />
             <Button x:Name="lab" Click="lab_Click" Content="Лабораторные работы"
                     Height="24"  Width="160" VerticalContentAlignment="Center"
                     Foreground="#A0893D" Margin="0,0,8,0"  />

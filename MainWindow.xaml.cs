@@ -125,31 +125,31 @@ namespace Simul
             timer.Stop();
 
             //поиск ошибок
-            Mistakes();
-
-            
+            Mistakes();            
 
             CompareList.CompareisList(
                 ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv, 8,
-                () => MessageGetResault());
+                () => MessageGetResault("1"));
             CompareList.CompareisList(
                ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv_Revers, 8,
-               () => MessageGetResault());
+               () => MessageGetResault("1R"));
             CompareList.CompareisList(
                 ShemList.shemaLine, 19,
-                () => MessageGetResault());
+                () => MessageGetResault("2"));
             CompareList.CompareisList(
                 ShemList.shemaLineRevers, 19,
-                () => MessageGetResault());
+                () => MessageGetResault("2R"));
 
         }
         // отправка сообщения с отчетом о сборке схемы
-        private async void MessageGetResault()
+        private async void MessageGetResault(string s)
         {
             try
             {
                 // отправка сообщения
-                await connection.InvokeAsync("Send", userTextBox.Text + "__ошибок = " + countLabel.Content + ", таймер = " + TimeLabel.Content, " РЕЗУЛЬТАТ ");
+                await connection.InvokeAsync("Send",
+                    userTextBox.Text + "__схема = N" + s + ", ошибок = " + countLabel.Content + ", таймер = " + TimeLabel.Content,
+                    " РЕЗУЛЬТАТ ");
             }
             catch (Exception ex)
             {
@@ -521,12 +521,6 @@ namespace Simul
 
 
 // окна схемы и лабораторные
-        private void shem_Click(object sender, RoutedEventArgs e)
-        {
-            ShemWindow1 w = new ShemWindow1();
-            w.Show();
-        }
-
         private void lab_Click(object sender, RoutedEventArgs e)
         {
             LaboratornyWindow1 l =new LaboratornyWindow1();
