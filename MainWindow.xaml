@@ -78,7 +78,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
 
@@ -134,7 +134,7 @@
 
         <Border
             Grid.Row="1" CornerRadius="8" Margin="4" Padding="4"
-            BorderBrush="#FFF1C190" BorderThickness="1" >
+            BorderBrush="#FFF1E3D5" BorderThickness="1" >
             <ScrollViewer
 
                 VerticalScrollBarVisibility="Hidden"
@@ -684,52 +684,54 @@
 
 
 
+        <Expander x:Name="expChat" Header="CHAT"
+                  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Right"
+                  ExpandDirection="Right" Width="34" Background="#1E2429"
+                  Expanded="expChat_Expanded" Collapsed="expChat_Collapsed" Foreground="#FFC39E2B" Margin="0,0,8,0" >
+            <ScrollViewer Margin="40"  VerticalScrollBarVisibility="Hidden">
+                <StackPanel Margin="4"
+                            Orientation="Vertical" VerticalAlignment="Top">
 
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Логин:" Foreground="#FF3690BB" Width="46"
+                               Margin="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Border  Margin="4"  Background="#FF0B1D1F" CornerRadius="12" Width="415"  >
+                            <TextBox x:Name="userTextBox" BorderThickness="0" CaretBrush="#FF3690BB" TextAlignment="Center"
+                                     Foreground="#FF3690BB" Background="Transparent" Height="24" Width="397"
+                                     VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="8,0,0,0"/>
+                        </Border>
+                    </StackPanel>
 
+                    <Border Height="40"  CornerRadius="12"
+                            Background="#FF0B1D1F" Margin="4">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="messageTextBox"
+                                     Width="428" Height="32" CaretBrush="#FF3690BB" TextAlignment="Center"
+                                     Foreground="#FF3690BB" Background="Transparent" Margin="9,4,4,4" BorderThickness="0" TextWrapping="Wrap"/>
+                            <Button x:Name="sendBtn"  Height="20" Width="24"
+                                    Click="Button_Click" BorderBrush="#FF17515E" BorderThickness="0" HorizontalAlignment="Right" >
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/Resources/message.png"/>
+                                </Button.Background>
+                            </Button>
+                        </StackPanel>
+                    </Border>
 
-        <StackPanel Grid.Column="0" Grid.Row="2" Margin="4,0,0,0"
-                    Orientation="Vertical" VerticalAlignment="Center">
-
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Логин:" Foreground="#FF3690BB" Width="46"
-                       Margin="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <Border  Margin="4"  Background="#FF0B1D1F" CornerRadius="12" Width="215"  >
-                    <TextBox x:Name="userTextBox" BorderThickness="0" CaretBrush="#FF3690BB" TextAlignment="Center"
-                             Foreground="#FF3690BB" Background="Transparent" Height="24" Width="199"
-                             VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-                </Border>
-            </StackPanel>
-
-            <Border Height="40"  CornerRadius="12"
-                    Background="#FF0B1D1F" Margin="4">
-                <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="messageTextBox"
-                             Width="224" Height="32" CaretBrush="#FF3690BB" TextAlignment="Center"
-                             Foreground="#FF3690BB" Background="Transparent" Margin="9,4,4,4" BorderThickness="0" TextWrapping="Wrap"/>
-                    <Button x:Name="sendBtn"  Height="20" Width="24"
-                            Click="Button_Click"  Margin="0,4,4,4"
-                            HorizontalAlignment="Right" BorderBrush="#FF17515E" BorderThickness="0">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/Resources/message.png"/>
-                        </Button.Background>
-                    </Button>
+                    <Border  Height="400"
+                            Margin="8"  Background="#FF0B1D1F" CornerRadius="12" >
+                        <ListBox x:Name="chatbox"
+                                 Background="Transparent"
+                                 Margin="8"
+                                 Foreground="#FF3690BB" BorderThickness="0" Height="380" >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Border>
                 </StackPanel>
-            </Border>
-        </StackPanel>
-
-        <Border  Grid.Row="2" Grid.Column="1"
-                Margin="8"  Background="#FF0B1D1F" CornerRadius="12" >
-            <ListBox x:Name="chatbox"
-                     Background="Transparent"
-                     Margin="8"
-                     Foreground="#FF3690BB" BorderThickness="0" >
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Border>
-
+            </ScrollViewer>
+        </Expander>
     </Grid>
 </Window>

@@ -570,5 +570,24 @@ namespace Simul
             InstrucsiaWindow1 r = new InstrucsiaWindow1();
             r.Show();
         }
+
+        private void expChat_Expanded(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation width = new DoubleAnimation();
+            width.From = expChat.ActualWidth;
+            width.To = 600;
+            width.Duration = TimeSpan.FromMilliseconds(500);
+            expChat.BeginAnimation(Expander.WidthProperty, width);
+        }
+        private void expChat_Collapsed(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation width = new DoubleAnimation();
+            width.From = expChat.ActualWidth;
+            width.To = 34;
+            width.Duration = TimeSpan.FromMilliseconds(500);
+            expChat.BeginAnimation(Expander.WidthProperty, width);
+        }
+
+        
     }
 }
