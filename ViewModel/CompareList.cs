@@ -6,12 +6,14 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Simul.ViewModel
 {
     public class CompareList
     {
+
 
         // сравнеие списков для нахождения совпадений
         public static void CompareisList(List<string> listToCompare, 

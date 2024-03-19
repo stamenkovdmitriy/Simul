@@ -126,30 +126,60 @@ namespace Simul
             timer.Stop();
 
             //поиск ошибок
-            Mistakes();            
+            Mistakes();
+
+            bool isResultReturned = false;
 
             CompareList.CompareisList(
                 ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv, 8,
-                () => MessageGetResault("1"));
-            CompareList.CompareisList(
-               ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv_Revers, 8,
-               () => MessageGetResault("1R"));
-            CompareList.CompareisList(
-                ShemList.shemaLine, 19,
-                () => MessageGetResault("2"));
-            CompareList.CompareisList(
-                ShemList.shemaLineRevers, 19,
-                () => MessageGetResault("2R"));
+                () => {
+                    MessageGetResault(" N1");
+                    isResultReturned = true;
+                });
 
+            if (!isResultReturned)
+            {
+                CompareList.CompareisList(
+                    ShemList.shemaLine_Pit_Avt3F_PostSB2_Eldv_Revers, 8,
+                    () => {
+                        MessageGetResault(" N1R");
+                        isResultReturned = true;
+                    });
+            }
+
+            if (!isResultReturned)
+            {
+                CompareList.CompareisList(
+                    ShemList.shemaLine, 19,
+                    () => {
+                        MessageGetResault(" N2");
+                        isResultReturned = true;
+                    });
+            }
+
+            if (!isResultReturned)
+            {
+                CompareList.CompareisList(
+                    ShemList.shemaLineRevers, 19,
+                    () => {
+                        MessageGetResault(" N2R");
+                        isResultReturned = true;
+                    });
+            }
+
+            if (!isResultReturned)
+            {
+                MessageGetResault("    ");
+            }
         }
         // отправка сообщения с отчетом о сборке схемы
-        private async void MessageGetResault(string s)
+        public async void MessageGetResault(string s)
         {
             try
             {
                 // отправка сообщения
                 await connection.InvokeAsync("Send",
-                    userTextBox.Text + "__схема = N" + s + ", ошибок = " + countLabel.Content + ", таймер = " + TimeLabel.Content,
+                    userTextBox.Text + "__схема =" + s + ", ошибок = " + countLabel.Content + ", таймер = " + TimeLabel.Content,
                     " РЕЗУЛЬТАТ ");
             }
             catch (Exception ex)
