@@ -54,7 +54,7 @@ namespace Simul
 
             // создаем подключение к хабу
             connection = new HubConnectionBuilder()
-                .WithUrl("https://derkov.bite.net/chats")
+                .WithUrl("https://derstamenkov.bsite.net/chat")
                 .Build();
 
             // Игнорирование ошибок сертификата для https
@@ -67,6 +67,7 @@ namespace Simul
                 {
                     var newMessage = $"{user}: {message}";
                     chatbox.Items.Insert(0, newMessage);
+                    recMessage.Width = 20;
                 });
             });
         }
@@ -573,6 +574,8 @@ namespace Simul
 
         private void expChat_Expanded(object sender, RoutedEventArgs e)
         {
+            recMessage.Width=0;
+
             DoubleAnimation width = new DoubleAnimation();
             width.From = expChat.ActualWidth;
             width.To = 600;
@@ -581,6 +584,8 @@ namespace Simul
         }
         private void expChat_Collapsed(object sender, RoutedEventArgs e)
         {
+            recMessage.Width = 0;
+
             DoubleAnimation width = new DoubleAnimation();
             width.From = expChat.ActualWidth;
             width.To = 34;
